@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% include "global/head.html" %}
+</head>
+<body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
+    
+    <main class="container mx-auto">
+        {% block content %}
+            <section class="flex items-center justify-center h-screen">
+                <h1 class="text-5xl font-bold">Django + Tailwind = ❤️</h1>
+            </section>
+        {% endblock content %}
+    </main>
+
+</body>
+</html>
