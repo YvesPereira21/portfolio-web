@@ -1,15 +1,16 @@
 import uuid
 from django.db import models
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 class Technology(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, verbose_name="Nome da Tecnologia")
-    icon = models.FileField(
-        upload_to='portfolio/images/icons/', 
+    icon = CloudinaryField(
+        "Ícone (SVG ou PNG)",
+        folder='portfolio/icons/', 
         blank=True, 
-        null=True, 
-        verbose_name="Ícone (SVG ou PNG)"
+        null=True
     )
 
     def __str__(self):
@@ -26,7 +27,7 @@ class AboutMe(models.Model):
     name = models.CharField(max_length=100, verbose_name="Seu Nome")
     bio = models.TextField(verbose_name="Texto Sobre Mim")
     slug = models.SlugField(max_length=120, unique=True)
-    profile_picture = models.ImageField(upload_to='portfolio/images/perfil/', blank=True, null=True, verbose_name="Foto de Perfil")
+    profile_picture = CloudinaryField("Foto de Perfil", folder='portfolio/perfil/', blank=True, null=True)
     email = models.EmailField(max_length=255, verbose_name="Email de contato")
     github_url = models.URLField(max_length=200, blank=True, null=True, verbose_name="Link do GitHub")
     linkedin_url = models.URLField(max_length=200, blank=True, null=True, verbose_name="Link do LinkedIn")
@@ -46,7 +47,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True, verbose_name="Slug da URL")    
     description = models.TextField(verbose_name="Descrição")
     short_description = models.TextField(verbose_name="Descrição curta para a listagem")
-    image = models.ImageField(upload_to='portfolio/images/projetos/', verbose_name="Imagem de Capa")
+    image = CloudinaryField("Imagem de Capa", folder='portfolio/projetos/')
     repository_url = models.URLField(max_length=200, blank=True, null=True, verbose_name="Link do Repositório")
     live_url = models.URLField(max_length=200, blank=True, null=True, verbose_name="Link do Projeto no Ar")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
