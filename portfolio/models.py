@@ -19,7 +19,6 @@ class Technology(models.Model):
     class Meta:
         verbose_name = "Tecnologia"
         verbose_name_plural = "Tecnologias"
-        ordering = ['name']
 
 
 class AboutMe(models.Model):
