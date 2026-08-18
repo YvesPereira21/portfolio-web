@@ -16,10 +16,10 @@
             {{ formation.start_date|date:"Y" }} - {% if formation.end_date %}{{ formation.end_date|date:"Y" }}{% else %}Em andamento{% endif %}
           </span>
         </div>
-        <div class="text-sm text-[#8b949e]">{{ formation.institution }}</div>
+        <div class="text-sm text-white">{{ formation.institution }}</div>
       </div>
       {% empty %}
-      <p class="text-sm text-[#8b949e]">Nenhuma formação acadêmica cadastrada ainda.</p>
+      <p class="text-sm text-white">Nenhuma formação acadêmica cadastrada ainda.</p>
       {% endfor %}
     </div>
   </div>
@@ -36,9 +36,9 @@
         <div>
           <div class="flex items-start justify-between gap-2 mb-1">
             <h4 class="text-base font-semibold text-[#f0f6fc]">{{ cert.title }}</h4>
-            <span class="text-xs font-medium text-[#8b949e] shrink-0">{{ cert.issue_date|date:"Y" }}</span>
+            <span class="text-xs font-medium text-white shrink-0">{{ cert.issue_date|date:"Y" }}</span>
           </div>
-          <div class="text-xs text-[#8b949e] mb-3">{{ cert.issuing_organization }}</div>
+          <div class="text-xs text-white mb-3">{{ cert.issuing_organization }}</div>
         </div>
 
         {% if cert.credential_url %}
