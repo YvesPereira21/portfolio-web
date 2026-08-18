@@ -26,7 +26,7 @@ import cloudinary
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-+^z^a&1@j4(o(o5==#me^_5pr&u%w(-n*sopgo=jmjhpy46dl9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'false'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
