@@ -19,13 +19,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
+import os
+import cloudinary
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+^z^a&1@j4(o(o5==#me^_5pr&u%w(-n*sopgo=jmjhpy46dl9'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-+^z^a&1@j4(o(o5==#me^_5pr&u%w(-n*sopgo=jmjhpy46dl9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -43,9 +46,6 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 
-import os
-import cloudinary
-
 cloudinary.config(
     cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
     api_key=os.environ.get('CLOUDINARY_API_KEY'),
@@ -60,6 +60,7 @@ if DEBUG:
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
