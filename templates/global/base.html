@@ -3,15 +3,63 @@
 <head>
     {% include "global/head.html" %}
 </head>
-<body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
-    
-    <main class="container mx-auto">
-        {% block content %}
-            <section class="flex items-center justify-center h-screen">
-                <h1 class="text-5xl font-bold">Django + Tailwind = ❤️</h1>
-            </section>
-        {% endblock content %}
-    </main>
+<body class="bg-[#010409] text-[#f0f6fc] font-sans min-h-screen flex flex-col items-center p-4 sm:p-8">
+
+  <!-- Navbar -->
+  <nav class="sticky top-6 z-50 bg-[#0D1117]/85 backdrop-blur-md border border-[#21262d] rounded-full p-1.5 flex gap-1 shadow-2xl mb-12">
+    <a href="{% url 'portfolio:home' %}" class="nav-btn px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 {% if request.resolver_match.url_name == 'home' %}text-[#34D399] bg-[#161b22] border border-[#21262d]{% else %}text-[#8b949e] hover:text-[#f0f6fc] border border-transparent{% endif %}">
+      Sobre mim
+    </a>
+    <a href="{% url 'portfolio:projects' %}" class="nav-btn px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 {% if request.resolver_match.url_name == 'projects' or request.resolver_match.url_name == 'project_detail' %}text-[#34D399] bg-[#161b22] border border-[#21262d]{% else %}text-[#8b949e] hover:text-[#f0f6fc] border border-transparent{% endif %}">
+      Projetos
+    </a>
+    <a href="{% url 'portfolio:education' %}" class="nav-btn px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 {% if request.resolver_match.url_name == 'education' %}text-[#34D399] bg-[#161b22] border border-[#21262d]{% else %}text-[#8b949e] hover:text-[#f0f6fc] border border-transparent{% endif %}">
+      Formação
+    </a>
+  </nav>
+
+  <!-- Conteiner principal -->
+  <main class="w-full max-w-[850px]">
+    {% block content %}
+    {% endblock content %}
+  </main>
+
+  <!-- Lógica para alterar a cor dos botões -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navButtons = document.querySelectorAll('.nav-btn');
+      
+      const activeClasses = ['text-[#34D399]', 'bg-[#161b22]', 'border-[#21262d]'];
+      const inactiveClasses = ['text-[#8b949e]', 'hover:text-[#f0f6fc]', 'border-transparent'];
+
+      navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetTab = button.getAttribute('data-tab');
+
+          navButtons.forEach(btn => {
+            if (btn === button) {
+              btn.classList.add(...activeClasses);
+              btn.classList.remove(...inactiveClasses);
+            } else {
+              btn.classList.remove(...activeClasses);
+              btn.classList.add(...inactiveClasses);
+            }
+          });
+
+          const tabContents = document.querySelectorAll('.tab-content');
+          tabContents.forEach(content => {
+            if (content.id === targetTab) {
+              content.classList.remove('hidden');
+              content.classList.add('block');
+            } else {
+              content.classList.add('hidden');
+              content.classList.remove('block');
+            }
+          });
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
