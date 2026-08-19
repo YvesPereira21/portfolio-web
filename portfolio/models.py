@@ -65,6 +65,18 @@ class Project(models.Model):
         verbose_name_plural = "Projetos"
         ordering = ['created_at']
 
+class ProjectImage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    image = CloudinaryField("Imagem Adicional", folder='portfolio/projetos/')
+    
+    def __str__(self):
+        return f"Imagem de {self.project.title}"
+
+    class Meta:
+        verbose_name = "Imagem do Projeto"
+        verbose_name_plural = "Imagens do Projeto"
+
 
 class Formation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
