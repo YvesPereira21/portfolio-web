@@ -18,7 +18,7 @@
         </div>
         {% endfor %}
       </div>
-      <div class="flex w-full justify-center gap-2 py-4">
+      <div class="flex flex-wrap w-full justify-center gap-2 py-4">
         <a href="#slide1" class="btn btn-xs bg-[#161b22] border-[#21262d] text-[#f0f6fc] hover:border-[#10B981] hover:text-[#34D399]">1</a>
         {% for img in project.images.all %}
         <a href="#slide{{ forloop.counter|add:'1' }}" class="btn btn-xs bg-[#161b22] border-[#21262d] text-[#f0f6fc] hover:border-[#10B981] hover:text-[#34D399]">{{ forloop.counter|add:"1" }}</a>
