@@ -10,11 +10,11 @@
     <div class="w-full rounded-2xl overflow-hidden border border-[#21262d] bg-[#07090e] flex flex-col items-center justify-center p-2 sm:p-0">
       <div class="carousel w-full">
         <div id="slide1" class="carousel-item w-full">
-          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-auto max-h-[300px] sm:max-h-[500px] object-contain sm:object-cover block">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-80 sm:h-auto max-h-[450px] sm:max-h-[500px] object-contain sm:object-cover block">
         </div>
         {% for img in project.images.all %}
         <div id="slide{{ forloop.counter|add:'1' }}" class="carousel-item w-full">
-          <img src="{{ img.image.url }}" alt="{{ project.title }}" class="w-full h-auto max-h-[300px] sm:max-h-[500px] object-contain sm:object-cover block">
+          <img src="{{ img.image.url }}" alt="{{ project.title }}" class="w-full h-80 sm:h-auto max-h-[450px] sm:max-h-[500px] object-contain sm:object-cover block">
         </div>
         {% endfor %}
       </div>
