@@ -1,61 +1,55 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-<section id="education" class="animate-[fadeIn_0.7s_ease]">
-  
-  <div>
-    <h2 class="text-xl font-bold text-[#f0f6fc] mb-4 flex items-center gap-2">
-      Formação Acadêmica
-    </h2>
-    <div class="flex flex-col gap-4">
-      {% for formation in formations %}
-      <div class="bg-[#0D1117] border border-[#21262d] rounded-2xl p-5 sm:p-6 transition-all duration-200 hover:border-[#10B981]">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <h3 class="text-base sm:text-lg font-semibold text-[#f0f6fc]">{{ formation.course }}</h3>
-            <span class="text-sm text-white font-medium">— {{ formation.institution }}</span>
-          </div>
-          <span class="text-xs font-semibold text-[#34D399] bg-[#161b22] px-2.5 py-1 rounded-md border border-[#10B981]/15 self-start sm:self-auto shrink-0">
-            {{ formation.start_date|date:"Y" }} - {% if formation.end_date %}{{ formation.end_date|date:"Y" }}{% else %}Em andamento{% endif %}
-          </span>
-        </div>
-      </div>
-      {% empty %}
-      <p class="text-sm text-white">Nenhuma formação acadêmica cadastrada ainda.</p>
-      {% endfor %}
-    </div>
+<section id="education" class="w-full">
+  <div style="margin-bottom: 1.5rem;">
+    <h2 class="section-title">Formação acadêmica</h2>
   </div>
 
-  <!-- Certificados e cursos -->
-  {% if certificates %}
-  <div>
-    <h2 class="text-xl font-bold text-[#f0f6fc] mb-4 flex items-center gap-2">
-      Certificados e Cursos
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {% for cert in certificates %}
-      <div class="bg-[#0D1117] border border-[#21262d] rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 hover:border-[#10B981]">
-        <div>
-          <div class="flex items-start justify-between gap-2 mb-1">
-            <h4 class="text-base font-semibold text-[#f0f6fc]">{{ cert.title }}</h4>
-            <span class="text-xs font-medium text-white shrink-0">{{ cert.issue_date|date:"Y" }}</span>
-          </div>
-          <div class="text-xs text-white mb-3">{{ cert.issuing_organization }}</div>
+  <div class="education-list">
+    {% for formation in formations %}
+    <article class="education-card">
+      <div class="education-header">
+        <div class="education-title-group">
+          <h3 class="education-course">{{ formation.course }}</h3>
+          <span class="education-institution">— {{ formation.institution }}</span>
         </div>
+        <span class="education-period">
+          {{ formation.start_date|date:"Y" }} - {% if formation.end_date %}{{ formation.end_date|date:"Y" }}{% else %}Presente (Em andamento){% endif %}
+        </span>
+      </div>
+    </article>
+    {% empty %}
+    <p class="text-sm" style="color: var(--text-muted);">Nenhuma formação acadêmica cadastrada ainda.</p>
+    {% endfor %}
+  </div>
 
+  {% if certificates %}
+  <div style="margin-top: 2.5rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <h2 class="section-title">Certificados e Cursos</h2>
+    </div>
+    <div class="education-list">
+      {% for cert in certificates %}
+      <article class="education-card">
+        <div class="education-header">
+          <div class="education-title-group">
+            <h3 class="education-course">{{ cert.title }}</h3>
+            <span class="education-institution">— {{ cert.issuing_organization }}</span>
+          </div>
+          <span class="education-period">{{ cert.issue_date|date:"Y" }}</span>
+        </div>
         {% if cert.credential_url %}
-        <div class="pt-2 border-t border-white/5">
-          <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" 
-             class="inline-flex items-center gap-1.5 text-xs text-[#34D399] hover:text-white font-medium transition-colors">
+        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-subtle);">
+          <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="link-subtle">
             Ver Credencial ↗
           </a>
         </div>
         {% endif %}
-      </div>
+      </article>
       {% endfor %}
     </div>
   </div>
   {% endif %}
-
 </section>
 {% endblock content %}

@@ -1,64 +1,78 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-<section id="about" class="animate-[fadeIn_0.7s_ease]">
-
-  <div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-8 mb-10">
-    <div class="space-y-4">
-      <h1 class="text-3xl sm:text-4xl text-[#34D399] font-bold">
-        Olá, eu me chamo <span class="text-[#34D399]">{{ about_me.name }}</span>!
+<section id="about" class="w-full">
+  <article class="hero-card">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Olá, eu me chamo <br>
+        <span class="highlight">{{ about_me.name }}</span>!
       </h1>
-      <p class="text-white text-base sm:text-lg max-w-xl text-justify">
-        {{ about_me.bio }}
+
+      <p class="hero-description">
+        {{ about_me.bio|linebreaksbr }}
       </p>
 
-      <!-- Links -->
-      <div class="flex flex-wrap gap-2.5 pt-2">
-        <!-- GitHub -->
-        <a href="{{ about_me.github_url }}" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 bg-[#0D1117] border border-[#21262d] text-[#f0f6fc] text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl transition-all duration-200 hover:border-[#10B981] hover:text-[#34D399]">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+      <div class="hero-actions">
+        {% if about_me.github_url %}
+        <a href="{{ about_me.github_url }}" target="_blank" rel="noopener noreferrer" class="btn-cyber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
-          GitHub
+          <span>GitHub</span>
         </a>
+        {% endif %}
 
-        <!-- LinkedIn -->
-        <a href="{{ about_me.linkedin_url }}" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 bg-[#0D1117] border border-[#21262d] text-[#f0f6fc] text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl transition-all duration-200 hover:border-[#10B981] hover:text-[#34D399]">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        {% if about_me.linkedin_url %}
+        <a href="{{ about_me.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="btn-cyber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
           </svg>
-          LinkedIn
+          <span>LinkedIn</span>
         </a>
+        {% endif %}
 
-        <!-- E-mail -->
-        <a href="mailto:{{ about_me.email }}" 
-           class="inline-flex items-center gap-2 bg-[#0D1117] border border-[#21262d] text-[#f0f6fc] text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl transition-all duration-200 hover:border-[#10B981] hover:text-[#34D399]">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        {% if about_me.email %}
+        <a href="mailto:{{ about_me.email }}" class="btn-cyber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.518 7.713 9.518-7.713v11.817h-19.036z"/>
           </svg>
-          E-mail
+          <span>E-mail</span>
         </a>
+        {% endif %}
       </div>
     </div>
 
-    <div class="w-40 h-40 sm:w-52 sm:h-52 rounded-3xl border-2 border-[#21262d] overflow-hidden shrink-0 shadow-lg">
-      <img src="{{ about_me.profile_picture.url }}" alt="{{ about_me.name }}" class="w-full h-full object-cover">
-    </div>
-  </div>
-
-  <!-- Tecnologias -->
-  <h2 class="text-xl font-semibold text-[#f0f6fc] mb-4">Tecnologias que utilizo</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-    {% for tech in about_me.skills.all %}
-    <div class="bg-[#0D1117] border border-[#21262d] rounded-xl p-3.5 flex items-center gap-3 transition-all duration-200 hover:border-[#10B981]">
-      <img src="{{ tech.icon.url }}" alt="{{ tech.name }}" class="w-6 h-6 object-contain">
-      <div>
-        <h4 class="text-sm font-semibold text-[#f0f6fc]">{{ tech.name }}</h4>
+    <div class="hero-avatar-wrap">
+      <div class="avatar-cyber-frame">
+        {% if about_me.profile_picture %}
+        <img src="{{ about_me.profile_picture.url }}" alt="{{ about_me.name }}" class="w-full h-full object-cover">
+        {% else %}
+        <div class="avatar-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        {% endif %}
       </div>
     </div>
-    {% endfor %}
+  </article>
+
+  <div style="margin-top: 2.5rem;">
+    <h2 class="section-title">Tecnologias</h2>
+
+    <div class="tech-grid">
+      {% for tech in about_me.skills.all %}
+      <div class="tech-card">
+        {% if tech.icon %}
+        <div class="tech-icon">
+          <img src="{{ tech.icon.url }}" alt="{{ tech.name }}" class="w-full h-full object-contain">
+        </div>
+        {% endif %}
+        <div class="tech-name">{{ tech.name }}</div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock content %}
